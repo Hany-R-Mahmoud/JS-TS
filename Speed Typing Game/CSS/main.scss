@@ -1,0 +1,133 @@
+@use "./SASS/Layout/global-values.scss" as *;
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+.game {
+  background-color: #eee;
+  min-height: 100vh;
+  .name {
+    background-color: $main-color;
+    color: white;
+    padding: 20px;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .container {
+    margin: auto;
+    max-width: 900px;
+    .message {
+      background-color: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+      text-align: center;
+      .seconds {
+        font-weight: bold;
+        color: $green;
+        &:before {
+          content: "[ ";
+        }
+        &:after {
+          content: " ]";
+        }
+      }
+    }
+    .start {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      background-color: $green;
+      color: white;
+      padding: 20px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.3s;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .the-word {
+      text-align: center;
+      font-weight: bold;
+      font-size: 60px;
+      color: $main-color;
+      user-select: none;
+    }
+    .input {
+      margin: 15px auto;
+      padding: 15px;
+      width: 100%;
+      display: block;
+      border: 3px solid $main-color;
+      font-size: 20px;
+      text-align: center;
+      text-transform: capitalize;
+      border-radius: 6px;
+      caret-color: $main-color;
+      &:focus {
+        outline: none;
+      }
+    }
+    .words-pool {
+      background-color: white;
+      margin: 15px 0;
+      padding: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      & div {
+        background-color: $main-color;
+        color: white;
+        font-weight: bold;
+        margin: 4px;
+        padding: 10px;
+        border-radius: 6px;
+      }
+    }
+    .control {
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
+      padding: 15px;
+      span {
+        font-weight: bold;
+        color: $green;
+      }
+    }
+    .finish {
+      font-weight: bold;
+      font-size: 40px;
+      text-align: center;
+      padding: 15px;
+      .good {
+        color: $main-color;
+      }
+      .bad {
+        color: $green;
+      }
+    }
+    .restart {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      background-color: $green;
+      color: white;
+      padding: 20px;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.3s;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

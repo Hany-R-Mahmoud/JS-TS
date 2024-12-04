@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial 1</title>
+    <!-- Render All -->
+    <link rel="stylesheet" href="./CSS/normalize.css">
+    <!-- Fontawesome Icons -->
+        <link rel="stylesheet" href="./CSS/all.min.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/main.css" />
+  </head>
+  <body>
+    <!-- clock -->
+     <div class="clock"></div>
+     <div class="countdown"></div>
+    <!-- up-button -->
+    <span id="up-btn">UP</span>
+    <!-- scroller -->
+    <div class="scroller"></div>
+    <!-- toggle button -->
+    <button class="toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- full-screen Nav -->
+    <nav class="full-screen">
+      <button class="close"><i class="fa-solid fa-rectangle-xmark"></i></button>
+      <ul class=>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <!-- sections -->
+     <div class="container">
+      <section class="one" id="home">
+        <div class="slider">
+        </div>
+        <div class="slide-control">
+          <button class="prev">Previous</button>
+          <ul class="slide-bullets">
+            
+          </ul>
+          <button class="next">Next</button>
+        </div>
+      </section>
+      <section class="two" id="about">
+        <form  class="sect-two">
+          <fieldset >
+            <legend>Message</legend>
+            <label for="input-message">Your Message</label>
+            <textarea name="input-message" type="text" id="input-message" placeholder="Write Your Message Here" onblur="this.setAttribute('placeholder', 'Write Your Message here')" onfocus="this.removeAttribute('placeholder')"></textarea>
+              Charachters Left: <span>100</span>
+              <label for="password">Your Password</label>
+              <input type="password" id="password" placeholder="Write Your Password" onblur="this.setAttribute('placeholder', 'Write Your Password')" onfocus="this.removeAttribute('placeholder')">
+              <div class="show-hide">Show Password</div>
+          </fieldset>
+        </form>
+        <ul class="tabs">
+          <li data-tab=".content-one" class="active">Tab 1</li>
+          <li data-tab=".content-two">Tab 2</li>
+          <li data-tab=".content-three">Tab 3</li>
+        </ul>
+        <div class="content">
+          <div class="content-one" style="display:block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla a, aperiam tempora tenetur ullam fugit minus maxime sunt vitae iste, nihil consequatur ducimus earum, aliquid distinctio quidem sint. Numquam, maiores!</div>
+          <div class="content-two"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </div>
+          <div class="content-three">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla a, aperiam tempora tenetur ullam fugit minus maxime sunt vitae iste</div>
+
+        </div>
+      </section>
+      <section class="three" id="services">
+        <div class="nums">
+          <div class="num" data-goal="100">0</div>
+          <div class="num" data-goal="300">0</div>
+          <div class="num" data-goal="200">0</div>
+        </div>
+      </section>
+      <section class="four" id="testimonials">
+        <div class="skills">
+          <h3>HTML</h3>
+          <div class="progress">
+            <span data-width="95%"></span>
+          </div>
+          <h3>CSS</h3>
+          <div class="progress">
+            <span data-width="85%"></span>
+          </div>
+          <h3>JS</h3>
+          <div class="progress">
+            <span data-width="75%"></span>
+          </div>
+        </div>
+      </section>
+      <section class="five" id="contact"><div class="image-shuffle">
+        <img src="./IMG/shuffle-1.jpg" alt="">
+      </div></section>
+     </div>
+    
+    <!-- JS file -->
+    <script src="./JS/index.js"></script>
+  </body>
+</html>

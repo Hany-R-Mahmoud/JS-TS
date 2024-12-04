@@ -1,0 +1,400 @@
+@use "./SASS/Layout/_global-rules.scss" as *;
+
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  height: 500vh;
+}
+.container {
+  @include breakpoints(small) {
+    width: 750px;
+  }
+  @include breakpoints(medium) {
+    width: 970px;
+  }
+  @include breakpoints(large) {
+    width: 1170px;
+  }
+  margin: 0 auto;
+}
+// clock
+
+.clock,
+.countdown {
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 6px;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $first-color;
+  background-color: $third-color;
+  z-index: 102;
+  transition: $transition-time;
+  &:hover {
+    color: $second-color;
+    background-color: $first-color;
+  }
+}
+.countdown {
+  top: 40px;
+}
+// up=btn
+span#up-btn {
+  background-color: $first-color;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  position: fixed;
+  right: 10px;
+  bottom: 30px;
+  @extend %cursor;
+  opacity: 0;
+  transition: $transition-time;
+  &:hover {
+    background-color: $second-color;
+  }
+  &.show {
+    opacity: 1;
+  }
+}
+// scroller
+.scroller {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $first-color;
+  height: 5px;
+  width: 0;
+  transition: $transition-time;
+  z-index: 999999;
+}
+// Toggle button
+.toggle {
+  background-color: #e7dbef;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  @extend %cursor;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  span {
+    background-color: $first-color;
+    width: 90%;
+    height: 5px;
+    border-radius: 20px;
+    display: block;
+    transition: $transition-time;
+  }
+  &:hover span {
+    background-color: $second-color;
+  }
+}
+// full-screen Nav
+.full-screen {
+  .close {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    border: none;
+    @extend %cursor;
+    background-color: $third-color;
+    transition: $transition-time;
+    z-index: 101;
+    transform: translateY(-200px);
+    i {
+      font-size: 40px;
+      color: $first-color;
+      transition: $transition-time;
+    }
+    &:hover i {
+      color: $second-color;
+    }
+  }
+  .open {
+    transform: translateY(0);
+  }
+  ul {
+    width: 100%;
+    height: 100%;
+    background-color: $third-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    list-style: none;
+    transform: translateY(-5000px);
+    transition: $transition-time;
+    li {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-basis: 80px;
+      transition: $transition-time;
+      &:hover {
+        background-color: $second-color;
+      }
+      &:hover a {
+        color: $first-color;
+      }
+      a {
+        text-align: center;
+        width: 100%;
+        font-size: 40px;
+        text-decoration: none;
+        color: $second-color;
+        transition: $transition-time;
+      }
+    }
+  }
+}
+// sections
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:first-of-type {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .slider {
+      width: 550px;
+      height: 450px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        display: none;
+        transition: $transition-time;
+        &.active {
+          display: block;
+        }
+      }
+    }
+    .slide-control {
+      width: 550px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .prev,
+      .next {
+        background-color: $first-color;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 6px;
+        @extend %cursor;
+        transition: $transition-time;
+        font-size: 22px;
+        &:hover {
+          background-color: $second-color;
+        }
+        &.disabled {
+          pointer-events: none;
+          opacity: 0.7;
+        }
+      }
+
+      .slide-bullets {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        .slide-bullet {
+          color: $first-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bold;
+          width: 35px;
+          height: 35px;
+          border-radius: 10px;
+          background-color: $third-color;
+          border: 2px solid $first-color;
+          @extend %cursor;
+          transition: $transition-time;
+          &.active {
+            background-color: $first-color;
+            color: #fff;
+            &:hover {
+              background-color: $second-color;
+              color: #fff;
+            }
+          }
+          &:hover {
+            border-color: $second-color;
+            color: $second-color;
+          }
+        }
+      }
+    }
+  }
+  &:nth-of-type(2) {
+    background-color: #faf3ee;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    form {
+      margin-left: 50px;
+      fieldset {
+        font-size: 16px;
+        border-radius: 6px;
+        color: $first-color;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        legend {
+          color: $second-color;
+          background-color: $third-color;
+        }
+
+        #input-message {
+          font-size: smaller;
+          height: 100px;
+          width: 200px;
+          outline: none;
+          padding: 5px;
+          border-radius: 4px;
+          color: $second-color;
+        }
+        span {
+          color: $second-color;
+        }
+        #password {
+          padding: 5px;
+          font-size: smaller;
+          outline: none;
+        }
+        .show-hide {
+          width: fit-content;
+          background-color: $first-color;
+          color: #fff;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 6px;
+          @extend %cursor;
+          transition: $transition-time;
+          font-size: 14px;
+          &:hover {
+            background-color: $second-color;
+          }
+        }
+      }
+    }
+    .tabs {
+      margin-top: 150px;
+      display: flex;
+      list-style: none;
+      gap: 10px;
+
+      li {
+        padding: 10px;
+        width: fit-content;
+        border-radius: 6px;
+        color: $first-color;
+        background-color: $third-color;
+        @extend %cursor;
+        transition: $transition-time;
+        &:hover {
+          color: #fff;
+          background-color: $second-color;
+        }
+        &.active {
+          color: #fff;
+          background-color: $first-color;
+        }
+      }
+    }
+    .content {
+      margin-top: 30px;
+      div {
+        background-color: #e5c9d7;
+        color: $second-color;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+      }
+    }
+  }
+  &:nth-of-type(3) {
+    background-color: #efe9e1;
+  }
+  &:nth-of-type(4) {
+    background-color: #e5c9d7;
+  }
+  &:nth-of-type(5) {
+    background-color: #fff;
+    .image-shuffle {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+.three {
+  .nums {
+    width: 400px;
+    display: flex;
+    color: white;
+    .num {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+    }
+    :first-child {
+      background-color: #72383d;
+    }
+    :nth-child(2) {
+      background-color: #5e9299;
+    }
+    :last-child {
+      background-color: #6e8658;
+    }
+  }
+}
+.four {
+  h3 {
+    color: #72383d;
+  }
+  .progress {
+    background-color: white;
+    height: 30px;
+    width: 300px;
+    border-radius: 6px;
+    position: relative;
+    margin-bottom: 20px;
+    span {
+      position: absolute;
+      background-color: $first-color;
+      height: 100%;
+      width: 0;
+      top: 0;
+      left: 0;
+      color: $first-color;
+      transition: $transition-time linear;
+    }
+  }
+}

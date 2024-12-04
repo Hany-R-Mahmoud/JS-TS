@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  list-style: none;
+}
+
+$first-color: #b55d8f;
+$second-color: #633482;
+$third-color: #e5c9d7;
+// $forth-color: #
+
+$transition-time: 0.5s;
+
+@mixin breakpoints($point) {
+  @if $point == small {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $point == medium {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $point == large {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+%cursor {
+  cursor: pointer;
+  user-select: none;
+}

@@ -21,8 +21,8 @@ A game to test speed typing, following tutorials from "Elzero Web School" on YT 
 
 ## Demo
 
-[View Demo on Awesome Screenshot]
-"https://www.awesomescreenshot.com/video/34312550?key=a93f43bb44a7954d9b00bfd95710d3a0"
+[![Video Demo](https://example.com/video-thumbnail-with-play-button.jpg)](https://www.awesomescreenshot.com/video/34312550?key=a93f43bb44a7954d9b00bfd95710d3a0)
+
 
 ## Screenshots
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To do list</title>
+    <link rel="stylesheet" href="./CSS/main.css" />
+  </head>
+  <body>
+    <div class="todo-container">
+      <div class="add-task">
+        <input
+          type="text"
+          id="add-task"
+          placeholder="Write Here"
+          onfocus="this.removeAttribute('placeholder')"
+          onblur="this.setAttribute('placeholder', 'Write Here' )"
+        />
+        <span class="plus">+</span>
+      </div>
+      <div class="tasks-content">
+        <span class="no-tasks-message">No Tasks to Show</span>
+      </div>
+      
+    </div>
+
+    <div class="task-stats">
+      <div class="tasks-count">Tasks <span>0</span></div>
+      <div class="completed-tasks">Completed <span>0</span></div>
+    </div>
+    <!-- JS file -->
+    <script src="./JS/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch Github repos</title>
+    <link rel="stylesheet" href="./CSS/main.css" />
+  </head>
+  <body>
+    <div class="repos-container">
+      <div class="get-repos">
+        <input
+          type="text"
+          placeholder="GitHub Username"
+          onfocus="this.removeAttribute('placeholder')"
+          onblur="this.setAttribute('placeholder', 'GitHub Username')"
+        />
+        <span class="get-button">Get Repos</span>
+      </div>
+      <div class="show-data">
+        <span>No Data to Show</span>
+      </div>
+    </div>
+
+    <!-- JS files -->
+    <script src="./JS/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

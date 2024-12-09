@@ -1,0 +1,266 @@
+@use "./SASS/Layout/global_values" as *;
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  @include breakpoints(small) {
+    width: 750px;
+  }
+  @include breakpoints(medium) {
+    width: 970px;
+  }
+  @include breakpoints(large) {
+    width: 1170;
+  }
+  margin: 20px auto;
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+  hr {
+    border: 1px solid #eee;
+  }
+  .game-info {
+    display: flex;
+    color: $first;
+    .game-name {
+      flex: 1;
+    }
+    .category {
+      flex: 1;
+      text-align: right;
+      span {
+        text-transform: capitalize;
+        color: $third;
+        font-weight: bold;
+      }
+    }
+  }
+  .row {
+    display: flex;
+    height: 550px;
+
+    .hangman-draw {
+      flex: 1;
+      background-color: $forth;
+      padding: 20px;
+      height: 324px;
+      display: flex;
+      justify-content: center;
+      border-color: $first;
+
+      .the-draw {
+        width: 60px;
+        height: 280px;
+        border-bottom: $width solid $first;
+        position: relative;
+        display: none;
+        .the-stand {
+          position: absolute;
+          width: $width;
+          background-color: $first;
+          height: 100%;
+          left: 50%;
+          translate: transformX(-50%);
+          display: none;
+        }
+        .the-hang:before {
+          content: "";
+          position: absolute;
+          height: $width;
+          background-color: $first;
+          width: 100px;
+          left: 30px;
+          top: 10px;
+          display: none;
+        }
+        .the-hang:after {
+          content: "";
+          position: absolute;
+          width: $width;
+          height: 30px;
+          background-color: $first;
+          left: 130px;
+          top: 10px;
+          display: none;
+        }
+        .the-rope {
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          position: absolute;
+          border: $width dashed $first;
+          left: 100px;
+          top: 36px;
+          display: none;
+        }
+        .the-man {
+          .head {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: $width solid $first;
+            position: absolute;
+            left: 110px;
+            top: 45px;
+            display: none;
+          }
+          .body {
+            position: absolute;
+            background-color: $first;
+            width: $width;
+            height: 110px;
+            top: 95px;
+            left: 134px;
+            display: none;
+          }
+          .hands {
+            &:before,
+            &:after {
+              content: "";
+              position: absolute;
+              width: 50px;
+              height: $width;
+              background-color: $first;
+              top: 130px;
+              display: none;
+            }
+            &:before {
+              left: 90px;
+              transform: rotate(30deg);
+            }
+            &:after {
+              left: 130px;
+              transform: rotate(-30deg);
+            }
+          }
+          .legs {
+            &:before,
+            &:after {
+              content: "";
+              position: absolute;
+              width: 50px;
+              height: $width;
+              background-color: $first;
+              top: 215px;
+              display: none;
+            }
+            &:before {
+              left: 90px;
+              transform: rotate(-30deg);
+            }
+            &:after {
+              left: 130px;
+              transform: rotate(30deg);
+            }
+          }
+        }
+      }
+      &.wrong-1 .the-draw {
+        display: block;
+      }
+      &.wrong-2 .the-stand {
+        display: block;
+      }
+      &.wrong-3 .the-hang:before,
+      &.wrong-3 .the-hang:after {
+        display: block;
+      }
+      &.wrong-4 .the-rope {
+        display: block;
+      }
+      &.wrong-5 .the-man .head {
+        display: block;
+      }
+      &.wrong-6 .the-man .body {
+        display: block;
+      }
+      &.wrong-7 .the-man .hands:before,
+      &.wrong-7 .the-man .hands:after {
+        display: block;
+      }
+      &.wrong-8 .the-man .legs:before,
+      &.wrong-8 .the-man .legs:after {
+        display: block;
+      }
+    }
+    .letters {
+      flex: 1;
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: $fifth;
+      &.finished {
+        pointer-events: none;
+      }
+
+      .letter-box {
+        width: 35px;
+        height: 35px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $second;
+        color: $forth;
+        font-size: 24px;
+        margin-right: 10px;
+        line-height: 55px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: 0.3s;
+        user-select: none;
+        &.clicked {
+          background-color: $first;
+          opacity: 0.4;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  .letters-guess {
+    margin: 10px auto;
+    background-color: $forth;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 104px;
+    flex-wrap: wrap;
+    span {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      color: $first;
+      font-size: 24px;
+      margin-right: 10px;
+      text-align: center;
+      line-height: 60px;
+      text-transform: uppercase;
+      font-weight: bold;
+      background-color: $forth;
+      border-bottom: 3px solid $first;
+      &.has-space {
+        background-color: none;
+        border-bottom: none;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          background-color: $second;
+          width: 20px;
+          height: 4px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+}

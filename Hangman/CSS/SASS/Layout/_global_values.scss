@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+@mixin breakpoints($points) {
+  @if ($points == small) {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @if ($points == medium) {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+  @if ($points == large) {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+$first: #053b47;
+$second: #5e9299;
+$third: #72383d;
+$forth: #faf3ee;
+$fifth: #d2dce6;
+$width: 4px;

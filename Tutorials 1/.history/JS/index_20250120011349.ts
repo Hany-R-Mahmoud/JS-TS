@@ -253,4 +253,3 @@ passBtn.addEventListener("click", () => {
 });
 
 console.log("hi");
-console.log("hi");

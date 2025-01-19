@@ -251,6 +251,3 @@ passBtn.addEventListener("click", () => {
     passBtn.textContent = "Show Password";
   }
 });
-
-console.log("hi");
-console.log("hi");

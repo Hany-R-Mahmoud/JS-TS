@@ -116,7 +116,6 @@ setInterval(() => {
   if (countDownTime > 0) {
     countDownTime--;
   } else {
-    document.location = "../index.html/#home";
     location.reload;
   }
 }, 1000);

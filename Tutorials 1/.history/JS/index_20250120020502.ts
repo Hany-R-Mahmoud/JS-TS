@@ -105,7 +105,7 @@ setInterval(() => {
   clock.innerHTML = currentTime;
 }, 1000);
 
-let countDownTime = 120;
+const countDownTime = 120;
 const countDown = <HTMLDivElement>document.querySelector(".countdown");
 setInterval(() => {
   let minutes: string | number = Math.floor(countDownTime / 60);
@@ -116,7 +116,6 @@ setInterval(() => {
   if (countDownTime > 0) {
     countDownTime--;
   } else {
-    document.location = "../index.html/#home";
     location.reload;
   }
 }, 1000);

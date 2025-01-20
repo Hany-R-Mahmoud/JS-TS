@@ -90,13 +90,25 @@ navBtns.forEach(
 );
 
 // clock && countdown
+// let clockDiv = <HTMLElement>document.querySelector(".clock");
+// setInterval(() => {
+//   let newTime = new Date();
+//   let hours: number | string = newTime.getHours();
+//   let minutes: number | string = newTime.getMinutes();
+//   let seconds: number | string = newTime.getSeconds();
+//   seconds = seconds < 10 ? "0" + seconds : seconds;
+//   minutes = minutes < 10 ? "0" + minutes : minutes;
+//   hours = hours < 10 ? "0" + hours : hours;
+//   let currentTime = hours + ":" + minutes + ":" + seconds;
+//   clockDiv.innerHTML = currentTime;
+// }, 1000);
 
 const clock = <HTMLDivElement>document.querySelector(".clock");
 setInterval(() => {
   let newDate = new Date();
-  let hours: number | string = newDate.getHours();
-  let minutes: number | string = newDate.getMinutes();
-  let seconds: number | string = newDate.getSeconds();
+  let hours = newDate.getHours();
+  let minutes = newDate.getMinutes();
+  let seconds = newDate.getSeconds();
   hours = hours < 10 ? "0" + hours : hours;
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -105,19 +117,20 @@ setInterval(() => {
   clock.innerHTML = currentTime;
 }, 1000);
 
-let countDownTime = 120;
-const countDown = <HTMLDivElement>document.querySelector(".countdown");
+let countDownTime: number = 120;
+let countDown = <HTMLElement>document.querySelector(".countdown");
 setInterval(() => {
-  let minutes: string | number = Math.floor(countDownTime / 60);
-  let seconds: string | number = countDownTime % 60;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
+  let minutes: number | string = Math.floor(countDownTime / 60);
+  let seconds: number | string = countDownTime % 60;
   seconds = seconds < 10 ? "0" + seconds : seconds;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
   countDown.innerHTML = minutes + ":" + seconds;
   if (countDownTime > 0) {
     countDownTime--;
-  } else {
-    document.location = "../index.html/#home";
-    location.reload;
+    if (countDownTime == 0) {
+      document.location = "../index.html/#home";
+      location.reload();
+    }
   }
 }, 1000);
 

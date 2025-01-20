@@ -105,22 +105,6 @@ setInterval(() => {
   clock.innerHTML = currentTime;
 }, 1000);
 
-let countDownTime = 120;
-const countDown = <HTMLDivElement>document.querySelector(".countdown");
-setInterval(() => {
-  let minutes: string | number = Math.floor(countDownTime / 60);
-  let seconds: string | number = countDownTime % 60;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  countDown.innerHTML = minutes + ":" + seconds;
-  if (countDownTime > 0) {
-    countDownTime--;
-  } else {
-    document.location = "../index.html/#home";
-    location.reload;
-  }
-}, 1000);
-
 //  section 5 - photo shuffle
 
 setInterval(() => {

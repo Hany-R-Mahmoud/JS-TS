@@ -1,4 +1,17 @@
 // UP-Button
+// let upBtn = document.getElementById("up-btn");
+// window.addEventListener("scroll", () => {
+//   window.scrollY > 100
+//     ? upBtn?.classList.add("show")
+//     : upBtn?.classList.remove("show");
+// });
+// upBtn?.addEventListener("click", () => {
+//   window.scrollTo({
+//     top: 0,
+//     behavior: "smooth",
+//   });
+// });
+
 const upBtn = <HTMLSpanElement>document.getElementById("up-btn");
 window.addEventListener("scroll", () => {
   window.scrollY > 100
@@ -6,15 +19,14 @@ window.addEventListener("scroll", () => {
     : upBtn.classList.remove("show");
 });
 upBtn.addEventListener("click", () => {
-  window.scrollTo({
+  window.scrollTo = {
     top: 0,
-    behavior: "smooth",
-  });
+    behaviour: "smooth",
+  };
 });
-
 //  scroller
+let scroller = <HTMLElement>document.querySelector(".scroller");
 
-const scroller = <HTMLDivElement>document.querySelector(".scroller");
 window.addEventListener("scroll", () => {
   scroller.style.width = `${
     (document.documentElement.scrollTop /
@@ -90,34 +102,33 @@ navBtns.forEach(
 );
 
 // clock && countdown
-
-const clock = <HTMLDivElement>document.querySelector(".clock");
+let clockDiv = <HTMLElement>document.querySelector(".clock");
 setInterval(() => {
-  let newDate = new Date();
-  let hours: number | string = newDate.getHours();
-  let minutes: number | string = newDate.getMinutes();
-  let seconds: number | string = newDate.getSeconds();
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
+  let newTime = new Date();
+  let hours: number | string = newTime.getHours();
+  let minutes: number | string = newTime.getMinutes();
+  let seconds: number | string = newTime.getSeconds();
   seconds = seconds < 10 ? "0" + seconds : seconds;
-
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  hours = hours < 10 ? "0" + hours : hours;
   let currentTime = hours + ":" + minutes + ":" + seconds;
-  clock.innerHTML = currentTime;
+  clockDiv.innerHTML = currentTime;
 }, 1000);
 
-let countDownTime = 120;
-const countDown = <HTMLDivElement>document.querySelector(".countdown");
+let countDownTime: number = 120;
+let countDown = <HTMLElement>document.querySelector(".countdown");
 setInterval(() => {
-  let minutes: string | number = Math.floor(countDownTime / 60);
-  let seconds: string | number = countDownTime % 60;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
+  let minutes: number | string = Math.floor(countDownTime / 60);
+  let seconds: number | string = countDownTime % 60;
   seconds = seconds < 10 ? "0" + seconds : seconds;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
   countDown.innerHTML = minutes + ":" + seconds;
   if (countDownTime > 0) {
     countDownTime--;
-  } else {
-    document.location = "../index.html/#home";
-    location.reload;
+    if (countDownTime == 0) {
+      document.location = "../index.html/#home";
+      location.reload();
+    }
   }
 }, 1000);
 

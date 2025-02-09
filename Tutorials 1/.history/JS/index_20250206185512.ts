@@ -40,6 +40,7 @@ function sectThree() {
     let numTarget = num.dataset.goal;
     let targetInterval = setInterval(() => {
       num.innerHTML++;
+      if (num.textContent > num.dataset.goal) return;
 
       if (numTarget === num.innerHTML) {
         clearInterval(targetInterval);

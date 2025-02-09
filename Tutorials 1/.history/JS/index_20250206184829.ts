@@ -55,7 +55,7 @@ function sectThree() {
 //     sectThreeInitiation = true;
 //   }
 // });
-
+console.log(sectionNums.forEach((num) => (num.innerHTML = "0")));
 const numbIncrease = function (entries) {
   const [entry] = entries;
   if (entry.isIntersecting) sectThree();

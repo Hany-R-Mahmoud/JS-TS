@@ -5,13 +5,11 @@ window.addEventListener("scroll", () => {
     ? upBtn.classList.add("show")
     : upBtn.classList.remove("show");
 });
-const home = <HTMLElement>document.querySelector(".one");
 upBtn.addEventListener("click", () => {
-  // window.scrollTo({
-  //   top: 0,
-  //   behavior: "smooth",
-  // });
-  home.scrollIntoView({ behavior: "smooth" });
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 });
 
 //  scroller
@@ -27,136 +25,92 @@ window.addEventListener("scroll", () => {
 });
 
 // increase number on scroll
-const sectionThree = <HTMLDivElement>document.querySelector(".three");
-const sectionFour = <HTMLDivElement>document.querySelector(".four");
-const sectionNums = <NodeListOf<HTMLDivElement>>(
-  document.querySelectorAll(".three .nums div")
-);
-
+let sectionThree = <HTMLElement>document.querySelector(".three");
+let sectionFour = <HTMLElement>document.querySelector(".four");
+let sectionNums = document.querySelectorAll(".three .nums div");
 let sectThreeInitiation = false;
 
 function sectThree() {
   sectionNums.forEach((num: any) => {
-    let numTarget = num.dataset.goal;
+    let targetNum = num.dataset.goal;
     let targetInterval = setInterval(() => {
       num.innerHTML++;
-
-      if (numTarget === num.innerHTML) {
+      if (num.innerHTML == targetNum) {
         clearInterval(targetInterval);
       }
     }, 30);
   });
 }
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionThree.offsetTop) {
-//     if (!sectThreeInitiation) {
-//       sectThree();
-//     }
-//     sectThreeInitiation = true;
-//   }
-// });
-
-const numbIncrease = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) sectThree();
-  else sectionNums.forEach((num) => (num.innerHTML = "0"));
-};
-const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
-  root: null,
-  threshold: 0,
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionThree.offsetTop) {
+    if (!sectThreeInitiation) {
+      sectThree();
+    }
+    sectThreeInitiation = true;
+  }
 });
-sectionThreeObserver.observe(sectionThree);
 
 // fill bar on scroll
-const sectionFourBars = <NodeListOf<HTMLSpanElement>>(
-  document.querySelectorAll(".four .progress span")
-);
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionFour.offsetTop) {
-//     sectionFourBars.forEach((bar: any) => {
-//       bar.style.width = bar.dataset.width;
-//     });
-//   } else {
-//     sectionFourBars.forEach((bar) => {
-//       bar.style.width = "0";
-//     });
-//   }
-// });
+let sectFourBars: any = document.querySelectorAll(".four .progress span");
 
-//sectionFour
-
-const fillBar = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) {
-    setTimeout(() => {
-      sectionFourBars.forEach((bar: any) => {
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionFour.offsetTop) {
+    sectFourBars.forEach(
+      (bar: { style: { width: any }; dataset: { width: any } }) => {
         bar.style.width = bar.dataset.width;
-      });
-    }, 1000);
-  } else {
-    sectionFourBars.forEach((bar) => {
-      bar.style.width = "0";
+      }
+    );
+  } else if (window.scrollY < sectionFour.offsetTop) {
+    sectFourBars.forEach((bar: { style: { width: number } }) => {
+      bar.style.width = 0;
     });
   }
-};
-
-const sectionFourObserver = new IntersectionObserver(fillBar, {
-  root: null,
-  threshold: 0,
 });
-sectionFourObserver.observe(sectionFour);
 
 // full-screen navigation
 const toggleButton = <HTMLButtonElement>document.querySelector(".toggle");
 const closeButton = <HTMLButtonElement>document.querySelector(".close");
-const fullScreen: any = document.querySelector(".full-screen ul");
-const navBtns = <NodeListOf<HTMLLIElement>>(
-  document.querySelectorAll(".full-screen ul li a")
-);
+const fullScreen = document.querySelector(".full-screen");
+const navBtns = <NodeListOf<HTMLLIElement>>document.querySelectorAll(".full-screen ul li a");
 
 toggleButton.addEventListener("click", () => {
-  fullScreen.style.transform = "translateY(0)";
-  closeButton.style.transform = "translateY(0)";
-});
+  fullScreen.style.translateY = "0",
+  closeButton.style.translateY = "0",
+    
+})
 closeButton.addEventListener("click", () => {
-  fullScreen.style.transform = "translateY(-2000px)";
-  closeButton.style.transform = "translateY(-200px)";
-});
+  fullScreen.style.translateY = "-2000px",
+  closeButton.style.translateY = "-200px",
+})
 navBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    fullScreen.style.transform = "translateY(-2000px)";
-    closeButton.style.transform = "translateY(-200px)";
-  });
-});
+    fullScreen.style.translateY = "-2000px",
+  closeButton.style.translateY = "-200px",
+  })
+})
 // clock && countdown
 
 const clock = <HTMLDivElement>document.querySelector(".clock");
 setInterval(() => {
-  // let newDate = new Date();
-  // let hours: number | string = newDate.getHours();
-  // let minutes: number | string = newDate.getMinutes();
-  // let seconds: number | string = newDate.getSeconds();
-  // hours = hours < 10 ? "0" + hours : hours;
-  // minutes = minutes < 10 ? "0" + minutes : minutes;
-  // seconds = seconds < 10 ? "0" + seconds : seconds;
+  let newDate = new Date();
+  let hours: number | string = newDate.getHours();
+  let minutes: number | string = newDate.getMinutes();
+  let seconds: number | string = newDate.getSeconds();
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
 
-  // let currentTime = hours + ":" + minutes + ":" + seconds;
-  // clock.innerHTML = currentTime;
-  const currentTime = new Intl.DateTimeFormat(navigator.language, {
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-  }).format(new Date());
-  clock.textContent = currentTime;
+  let currentTime = hours + ":" + minutes + ":" + seconds;
+  clock.innerHTML = currentTime;
 }, 1000);
 
 let countDownTime = 120;
 const countDown = <HTMLDivElement>document.querySelector(".countdown");
 setInterval(() => {
-  let minutes = String(Math.floor(countDownTime / 60)).padStart(2, "0");
-  let seconds = String(countDownTime % 60).padStart(2, "0");
-  // minutes = minutes < 10 ? "0" + minutes : minutes;
-  // seconds = seconds < 10 ? "0" + seconds : seconds;
+  let minutes: string | number = Math.floor(countDownTime / 60);
+  let seconds: string | number = countDownTime % 60;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
   countDown.innerHTML = minutes + ":" + seconds;
   if (countDownTime > 0) {
     countDownTime--;
@@ -183,43 +137,24 @@ setInterval(() => {
 }, 6000);
 
 // section 2 - tabs and content
-// let sectionTwoTabsArray = Array.from(
-//   document.querySelectorAll(".two .tabs li")
-// );
-// let sectionTwoContentArray = Array.from(
-//   document.querySelectorAll(".two .content div")
-// );
-// sectionTwoTabsArray.forEach((tab) => {
-//   tab.addEventListener("click", (e: any) => {
-//     sectionTwoTabsArray.forEach((tab) => {
-//       tab.classList.remove("active");
-//     });
-//     e.currentTarget.classList.add("active");
-//     sectionTwoContentArray.forEach((cont: any) => {
-//       cont.style.display = "none";
-//     });
-//     let targetContent = document.querySelector(e.currentTarget.dataset.tab);
-//     targetContent.style.display = "block";
-//   });
-// });
-const tabContainer = <HTMLUListElement>document.querySelector(".tabs");
-const tabs = <NodeListOf<HTMLLIElement>>document.querySelectorAll(".tabs li");
-const contents = <NodeListOf<HTMLDivElement>>(
-  document.querySelectorAll(".content div")
+let sectionTwoTabsArray = Array.from(
+  document.querySelectorAll(".two .tabs li")
 );
-tabContainer.addEventListener("click", function (e) {
-  const clicked = e.target.closest("li");
-
-  // guard clause
-  if (!clicked) return;
-
-  tabs.forEach((tab) => tab.classList.remove("active"));
-  clicked.classList.add("active");
-
-  contents.forEach((content) => {
-    content.style.display = "none";
+let sectionTwoContentArray = Array.from(
+  document.querySelectorAll(".two .content div")
+);
+sectionTwoTabsArray.forEach((tab) => {
+  tab.addEventListener("click", (e: any) => {
+    sectionTwoTabsArray.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+    e.currentTarget.classList.add("active");
+    sectionTwoContentArray.forEach((cont: any) => {
+      cont.style.display = "none";
+    });
+    let targetContent = document.querySelector(e.currentTarget.dataset.tab);
+    targetContent.style.display = "block";
   });
-  document.querySelector(clicked.dataset.tab).style.display = "block";
 });
 
 // Section 1 - Photo slider

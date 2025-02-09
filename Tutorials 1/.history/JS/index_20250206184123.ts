@@ -41,7 +41,7 @@ function sectThree() {
     let targetInterval = setInterval(() => {
       num.innerHTML++;
 
-      if (numTarget === num.innerHTML) {
+      if (numTarget >= num.innerHTML) {
         clearInterval(targetInterval);
       }
     }, 30);
@@ -55,7 +55,6 @@ function sectThree() {
 //     sectThreeInitiation = true;
 //   }
 // });
-
 const numbIncrease = function (entries) {
   const [entry] = entries;
   if (entry.isIntersecting) sectThree();

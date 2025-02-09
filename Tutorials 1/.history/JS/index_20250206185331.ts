@@ -39,11 +39,11 @@ function sectThree() {
   sectionNums.forEach((num: any) => {
     let numTarget = num.dataset.goal;
     let targetInterval = setInterval(() => {
-      num.innerHTML++;
+      if (num.textContent < num.dataset.goal) num.innerHTML++;
 
-      if (numTarget === num.innerHTML) {
-        clearInterval(targetInterval);
-      }
+      // if (numTarget === num.innerHTML) {
+      //   clearInterval(targetInterval);
+      // }
     }, 30);
   });
 }

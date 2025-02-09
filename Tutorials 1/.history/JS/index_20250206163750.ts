@@ -5,13 +5,13 @@ window.addEventListener("scroll", () => {
     ? upBtn.classList.add("show")
     : upBtn.classList.remove("show");
 });
-const home = <HTMLElement>document.querySelector(".one");
+const home = document.getElementById("#home");
 upBtn.addEventListener("click", () => {
   // window.scrollTo({
   //   top: 0,
   //   behavior: "smooth",
   // });
-  home.scrollIntoView({ behavior: "smooth" });
+  home?.scrollIntoView({ behavior: "smooth" });
 });
 
 //  scroller
@@ -47,64 +47,30 @@ function sectThree() {
     }, 30);
   });
 }
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionThree.offsetTop) {
-//     if (!sectThreeInitiation) {
-//       sectThree();
-//     }
-//     sectThreeInitiation = true;
-//   }
-// });
-
-const numbIncrease = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) sectThree();
-  else sectionNums.forEach((num) => (num.innerHTML = "0"));
-};
-const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
-  root: null,
-  threshold: 0,
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionThree.offsetTop) {
+    if (!sectThreeInitiation) {
+      sectThree();
+    }
+    sectThreeInitiation = true;
+  }
 });
-sectionThreeObserver.observe(sectionThree);
 
 // fill bar on scroll
 const sectionFourBars = <NodeListOf<HTMLSpanElement>>(
   document.querySelectorAll(".four .progress span")
 );
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionFour.offsetTop) {
-//     sectionFourBars.forEach((bar: any) => {
-//       bar.style.width = bar.dataset.width;
-//     });
-//   } else {
-//     sectionFourBars.forEach((bar) => {
-//       bar.style.width = "0";
-//     });
-//   }
-// });
-
-//sectionFour
-
-const fillBar = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) {
-    setTimeout(() => {
-      sectionFourBars.forEach((bar: any) => {
-        bar.style.width = bar.dataset.width;
-      });
-    }, 1000);
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionFour.offsetTop) {
+    sectionFourBars.forEach((bar: any) => {
+      bar.style.width = bar.dataset.width;
+    });
   } else {
     sectionFourBars.forEach((bar) => {
       bar.style.width = "0";
     });
   }
-};
-
-const sectionFourObserver = new IntersectionObserver(fillBar, {
-  root: null,
-  threshold: 0,
 });
-sectionFourObserver.observe(sectionFour);
 
 // full-screen navigation
 const toggleButton = <HTMLButtonElement>document.querySelector(".toggle");
@@ -183,43 +149,24 @@ setInterval(() => {
 }, 6000);
 
 // section 2 - tabs and content
-// let sectionTwoTabsArray = Array.from(
-//   document.querySelectorAll(".two .tabs li")
-// );
-// let sectionTwoContentArray = Array.from(
-//   document.querySelectorAll(".two .content div")
-// );
-// sectionTwoTabsArray.forEach((tab) => {
-//   tab.addEventListener("click", (e: any) => {
-//     sectionTwoTabsArray.forEach((tab) => {
-//       tab.classList.remove("active");
-//     });
-//     e.currentTarget.classList.add("active");
-//     sectionTwoContentArray.forEach((cont: any) => {
-//       cont.style.display = "none";
-//     });
-//     let targetContent = document.querySelector(e.currentTarget.dataset.tab);
-//     targetContent.style.display = "block";
-//   });
-// });
-const tabContainer = <HTMLUListElement>document.querySelector(".tabs");
-const tabs = <NodeListOf<HTMLLIElement>>document.querySelectorAll(".tabs li");
-const contents = <NodeListOf<HTMLDivElement>>(
-  document.querySelectorAll(".content div")
+let sectionTwoTabsArray = Array.from(
+  document.querySelectorAll(".two .tabs li")
 );
-tabContainer.addEventListener("click", function (e) {
-  const clicked = e.target.closest("li");
-
-  // guard clause
-  if (!clicked) return;
-
-  tabs.forEach((tab) => tab.classList.remove("active"));
-  clicked.classList.add("active");
-
-  contents.forEach((content) => {
-    content.style.display = "none";
+let sectionTwoContentArray = Array.from(
+  document.querySelectorAll(".two .content div")
+);
+sectionTwoTabsArray.forEach((tab) => {
+  tab.addEventListener("click", (e: any) => {
+    sectionTwoTabsArray.forEach((tab) => {
+      tab.classList.remove("active");
+    });
+    e.currentTarget.classList.add("active");
+    sectionTwoContentArray.forEach((cont: any) => {
+      cont.style.display = "none";
+    });
+    let targetContent = document.querySelector(e.currentTarget.dataset.tab);
+    targetContent.style.display = "block";
   });
-  document.querySelector(clicked.dataset.tab).style.display = "block";
 });
 
 // Section 1 - Photo slider

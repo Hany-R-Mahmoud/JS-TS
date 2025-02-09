@@ -6,11 +6,13 @@ window.addEventListener("scroll", () => {
         ? upBtn.classList.add("show")
         : upBtn.classList.remove("show");
 });
+const home = document.querySelector(".one");
 upBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: "smooth",
+    // });
+    home.scrollIntoView({ behavior: "smooth" });
 });
 //  scroller
 const scroller = document.querySelector(".scroller");
@@ -21,119 +23,175 @@ window.addEventListener("scroll", () => {
         100}%`;
 });
 // increase number on scroll
-let sectionThree = document.querySelector(".three");
-let sectionFour = document.querySelector(".four");
-let sectionNums = document.querySelectorAll(".three .nums div");
+const sectionThree = document.querySelector(".three");
+const sectionFour = document.querySelector(".four");
+const sectionNums = (document.querySelectorAll(".three .nums div"));
 let sectThreeInitiation = false;
 function sectThree() {
     sectionNums.forEach((num) => {
-        let targetNum = num.dataset.goal;
+        let numTarget = num.dataset.goal;
         let targetInterval = setInterval(() => {
             num.innerHTML++;
-            if (num.innerHTML == targetNum) {
+            if (numTarget === num.innerHTML) {
                 clearInterval(targetInterval);
             }
         }, 30);
     });
 }
-window.addEventListener("scroll", () => {
-    if (window.scrollY >= sectionThree.offsetTop) {
-        if (!sectThreeInitiation) {
-            sectThree();
-        }
-        sectThreeInitiation = true;
-    }
+// window.addEventListener("scroll", () => {
+//   if (window.scrollY >= sectionThree.offsetTop) {
+//     if (!sectThreeInitiation) {
+//       sectThree();
+//     }
+//     sectThreeInitiation = true;
+//   }
+// });
+const numbIncrease = function (entries) {
+    const [entry] = entries;
+    if (entry.isIntersecting)
+        sectThree();
+    else
+        sectionNums.forEach((num) => (num.innerHTML = "0"));
+};
+const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
+    root: null,
+    threshold: 0,
 });
+sectionThreeObserver.observe(sectionThree);
 // fill bar on scroll
-let sectFourBars = document.querySelectorAll(".four .progress span");
-window.addEventListener("scroll", () => {
-    if (window.scrollY >= sectionFour.offsetTop) {
-        sectFourBars.forEach((bar) => {
-            bar.style.width = bar.dataset.width;
+const sectionFourBars = (document.querySelectorAll(".four .progress span"));
+// window.addEventListener("scroll", () => {
+//   if (window.scrollY >= sectionFour.offsetTop) {
+//     sectionFourBars.forEach((bar: any) => {
+//       bar.style.width = bar.dataset.width;
+//     });
+//   } else {
+//     sectionFourBars.forEach((bar) => {
+//       bar.style.width = "0";
+//     });
+//   }
+// });
+//sectionFour
+const fillBar = function (entries) {
+    const [entry] = entries;
+    if (entry.isIntersecting) {
+        setTimeout(() => {
+            sectionFourBars.forEach((bar) => {
+                bar.style.width = bar.dataset.width;
+            });
+        }, 1000);
+    }
+    else {
+        sectionFourBars.forEach((bar) => {
+            bar.style.width = "0";
         });
     }
-    else if (window.scrollY < sectionFour.offsetTop) {
-        sectFourBars.forEach((bar) => {
-            bar.style.width = 0;
-        });
-    }
+};
+const sectionFourObserver = new IntersectionObserver(fillBar, {
+    root: null,
+    threshold: 0,
 });
+sectionFourObserver.observe(sectionFour);
 // full-screen navigation
-let toggleBtn = document.querySelector(".toggle");
-let closeBtn = document.querySelector(".close");
-let fullScreen = document.querySelector(".full-screen ul");
-let navBtns = document.querySelectorAll(".full-screen ul li a");
-toggleBtn === null || toggleBtn === void 0 ? void 0 : toggleBtn.addEventListener("click", () => {
+const toggleButton = document.querySelector(".toggle");
+const closeButton = document.querySelector(".close");
+const fullScreen = document.querySelector(".full-screen ul");
+const navBtns = (document.querySelectorAll(".full-screen ul li a"));
+toggleButton.addEventListener("click", () => {
     fullScreen.style.transform = "translateY(0)";
-    closeBtn.style.transform = "translateY(0)";
+    closeButton.style.transform = "translateY(0)";
 });
-closeBtn.addEventListener("click", () => {
+closeButton.addEventListener("click", () => {
     fullScreen.style.transform = "translateY(-2000px)";
-    closeBtn.style.transform = "translateY(-200px)";
+    closeButton.style.transform = "translateY(-200px)";
 });
 navBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         fullScreen.style.transform = "translateY(-2000px)";
-        closeBtn.style.transform = "translateY(-200px)";
+        closeButton.style.transform = "translateY(-200px)";
     });
 });
 // clock && countdown
 const clock = document.querySelector(".clock");
 setInterval(() => {
-    let newDate = new Date();
-    let hours = newDate.getHours();
-    let minutes = newDate.getMinutes();
-    let seconds = newDate.getSeconds();
-    hours = hours < 10 ? "0" + hours : hours;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    let currentTime = hours + ":" + minutes + ":" + seconds;
-    clock.innerHTML = currentTime;
+    // let newDate = new Date();
+    // let hours: number | string = newDate.getHours();
+    // let minutes: number | string = newDate.getMinutes();
+    // let seconds: number | string = newDate.getSeconds();
+    // hours = hours < 10 ? "0" + hours : hours;
+    // minutes = minutes < 10 ? "0" + minutes : minutes;
+    // seconds = seconds < 10 ? "0" + seconds : seconds;
+    // let currentTime = hours + ":" + minutes + ":" + seconds;
+    // clock.innerHTML = currentTime;
+    const currentTime = new Intl.DateTimeFormat(navigator.language, {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+    }).format(new Date());
+    clock.textContent = currentTime;
 }, 1000);
 let countDownTime = 120;
 const countDown = document.querySelector(".countdown");
 setInterval(() => {
-    let minutes = Math.floor(countDownTime / 60);
-    let seconds = countDownTime % 60;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    let minutes = String(Math.floor(countDownTime / 60)).padStart(2, "0");
+    let seconds = String(countDownTime % 60).padStart(2, "0");
+    // minutes = minutes < 10 ? "0" + minutes : minutes;
+    // seconds = seconds < 10 ? "0" + seconds : seconds;
     countDown.innerHTML = minutes + ":" + seconds;
     if (countDownTime > 0) {
         countDownTime--;
     }
     else {
-        document.location = "../index.html/#home";
-        location.reload;
+        location.reload();
     }
 }, 1000);
 //  section 5 - photo shuffle
 setInterval(() => {
-    let imageShuffle = (document.querySelector(".image-shuffle img"));
-    let imageShuffleArray = [
+    const shuffledImage = (document.querySelector(".image-shuffle img"));
+    const imageAlbum = [
         "https://ik.imagekit.io/hrim/IMG/shuffle-1.jpg?updatedAt=1731737806355",
         "https://ik.imagekit.io/hrim/IMG/shuffle-2.jpg?updatedAt=1731737806238",
         "https://ik.imagekit.io/hrim/IMG/shuffle-3.jpg?updatedAt=1731737806043",
         "https://ik.imagekit.io/hrim/IMG/shuffle-4.jpg?updatedAt=1731737806597",
         "https://ik.imagekit.io/hrim/IMG/shuffle-5.jpg?updatedAt=1731737805431",
     ];
-    let randomImageShuffle = imageShuffleArray[Math.floor(Math.random() * imageShuffleArray.length)];
-    imageShuffle.src = randomImageShuffle;
+    let randomImage = imageAlbum[Math.floor(Math.random() * imageAlbum.length)];
+    shuffledImage.src = randomImage;
 }, 6000);
 // section 2 - tabs and content
-let sectionTwoTabsArray = Array.from(document.querySelectorAll(".two .tabs li"));
-let sectionTwoContentArray = Array.from(document.querySelectorAll(".two .content div"));
-sectionTwoTabsArray.forEach((tab) => {
-    tab.addEventListener("click", (e) => {
-        sectionTwoTabsArray.forEach((tab) => {
-            tab.classList.remove("active");
-        });
-        e.currentTarget.classList.add("active");
-        sectionTwoContentArray.forEach((cont) => {
-            cont.style.display = "none";
-        });
-        let targetContent = document.querySelector(e.currentTarget.dataset.tab);
-        targetContent.style.display = "block";
+// let sectionTwoTabsArray = Array.from(
+//   document.querySelectorAll(".two .tabs li")
+// );
+// let sectionTwoContentArray = Array.from(
+//   document.querySelectorAll(".two .content div")
+// );
+// sectionTwoTabsArray.forEach((tab) => {
+//   tab.addEventListener("click", (e: any) => {
+//     sectionTwoTabsArray.forEach((tab) => {
+//       tab.classList.remove("active");
+//     });
+//     e.currentTarget.classList.add("active");
+//     sectionTwoContentArray.forEach((cont: any) => {
+//       cont.style.display = "none";
+//     });
+//     let targetContent = document.querySelector(e.currentTarget.dataset.tab);
+//     targetContent.style.display = "block";
+//   });
+// });
+const tabContainer = document.querySelector(".tabs");
+const tabs = document.querySelectorAll(".tabs li");
+const contents = (document.querySelectorAll(".content div"));
+tabContainer.addEventListener("click", function (e) {
+    const clicked = e.target.closest("li");
+    // guard clause
+    if (!clicked)
+        return;
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    clicked.classList.add("active");
+    contents.forEach((content) => {
+        content.style.display = "none";
     });
+    document.querySelector(clicked.dataset.tab).style.display = "block";
 });
 // Section 1 - Photo slider
 let sliderCollectionArray = [

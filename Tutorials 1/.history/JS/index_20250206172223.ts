@@ -47,64 +47,30 @@ function sectThree() {
     }, 30);
   });
 }
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionThree.offsetTop) {
-//     if (!sectThreeInitiation) {
-//       sectThree();
-//     }
-//     sectThreeInitiation = true;
-//   }
-// });
-
-const numbIncrease = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) sectThree();
-  else sectionNums.forEach((num) => (num.innerHTML = "0"));
-};
-const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
-  root: null,
-  threshold: 0,
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionThree.offsetTop) {
+    if (!sectThreeInitiation) {
+      sectThree();
+    }
+    sectThreeInitiation = true;
+  }
 });
-sectionThreeObserver.observe(sectionThree);
 
 // fill bar on scroll
 const sectionFourBars = <NodeListOf<HTMLSpanElement>>(
   document.querySelectorAll(".four .progress span")
 );
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionFour.offsetTop) {
-//     sectionFourBars.forEach((bar: any) => {
-//       bar.style.width = bar.dataset.width;
-//     });
-//   } else {
-//     sectionFourBars.forEach((bar) => {
-//       bar.style.width = "0";
-//     });
-//   }
-// });
-
-//sectionFour
-
-const fillBar = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) {
-    setTimeout(() => {
-      sectionFourBars.forEach((bar: any) => {
-        bar.style.width = bar.dataset.width;
-      });
-    }, 1000);
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionFour.offsetTop) {
+    sectionFourBars.forEach((bar: any) => {
+      bar.style.width = bar.dataset.width;
+    });
   } else {
     sectionFourBars.forEach((bar) => {
       bar.style.width = "0";
     });
   }
-};
-
-const sectionFourObserver = new IntersectionObserver(fillBar, {
-  root: null,
-  threshold: 0,
 });
-sectionFourObserver.observe(sectionFour);
 
 // full-screen navigation
 const toggleButton = <HTMLButtonElement>document.querySelector(".toggle");

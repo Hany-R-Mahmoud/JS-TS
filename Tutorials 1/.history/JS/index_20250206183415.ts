@@ -55,11 +55,9 @@ function sectThree() {
 //     sectThreeInitiation = true;
 //   }
 // });
-
 const numbIncrease = function (entries) {
   const [entry] = entries;
   if (entry.isIntersecting) sectThree();
-  else sectionNums.forEach((num) => (num.innerHTML = "0"));
 };
 const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
   root: null,

@@ -47,25 +47,14 @@ function sectThree() {
     }, 30);
   });
 }
-// window.addEventListener("scroll", () => {
-//   if (window.scrollY >= sectionThree.offsetTop) {
-//     if (!sectThreeInitiation) {
-//       sectThree();
-//     }
-//     sectThreeInitiation = true;
-//   }
-// });
-
-const numbIncrease = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting) sectThree();
-  else sectionNums.forEach((num) => (num.innerHTML = "0"));
-};
-const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
-  root: null,
-  threshold: 0,
+window.addEventListener("scroll", () => {
+  if (window.scrollY >= sectionThree.offsetTop) {
+    if (!sectThreeInitiation) {
+      sectThree();
+    }
+    sectThreeInitiation = true;
+  }
 });
-sectionThreeObserver.observe(sectionThree);
 
 // fill bar on scroll
 const sectionFourBars = <NodeListOf<HTMLSpanElement>>(

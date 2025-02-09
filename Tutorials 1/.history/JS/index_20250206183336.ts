@@ -55,17 +55,14 @@ function sectThree() {
 //     sectThreeInitiation = true;
 //   }
 // });
-
 const numbIncrease = function (entries) {
   const [entry] = entries;
   if (entry.isIntersecting) sectThree();
-  else sectionNums.forEach((num) => (num.innerHTML = "0"));
-};
-const sectionThreeObserver = new IntersectionObserver(numbIncrease, {
-  root: null,
-  threshold: 0,
-});
-sectionThreeObserver.observe(sectionThree);
+}
+const sectionThreeObserver = new IntersectionObserver(, {
+  root: null, threshold: 0
+})
+sectionThreeObserver.observe(sectThree)
 
 // fill bar on scroll
 const sectionFourBars = <NodeListOf<HTMLSpanElement>>(
